@@ -87,11 +87,7 @@
     </nav>
     <!-- #Top Bar -->
     <section>
-        <!-- Left Sidebar -->
-        <aside id="leftsidebar" class="sidebar">
-            <!-- User Info -->
-            <!-- #User Info -->
-            <!-- Menu -->
+        <aside id="leftsidebar" class="sidebar" style="width: 200px;">
             <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
@@ -110,12 +106,10 @@
         
                 </ul>
             </div>
-        </aside>
-     
-       
+        </aside> 
     </section>
-
-    <section class="content">
+    <section class="content" style="margin-left: 200px;">
+    {{-- <section class="content"> --}}
         <div class="container-fluid">
             @yield('content')
         </div>

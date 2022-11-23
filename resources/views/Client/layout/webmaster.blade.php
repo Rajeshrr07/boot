@@ -68,19 +68,18 @@
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 
                 
-                <div class=" navbar-right navbar-brand">
+                {{-- <div class=" navbar-right navbar-brand">
                     <form  action="{{ route('search') }}" method="GET" class="form-inline">
                         <input class="form-control mr-sm-2" type="search"  name="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
                       </form>
-                    </div>
+                    </div> --}}
             </div>
         </div>
     </nav>
     <!-- #Top Bar -->
     <section>
-        <!-- Left Sidebar -->
-        <aside id="leftsidebar" class="sidebar">
+        <aside id="leftsidebar" class="sidebar" style="width: 200px;">
             <div class="menu">
                 <ul class="list">
                     <li class="header">Components</li>
@@ -96,13 +95,16 @@
                 </ul>
             </div>
         </aside>
-     
-       
     </section>
 
     <section class="content">
         <div class="container-fluid">
-            <h1>Hello</h1>
+            <h1 class="mb-3 fw-semibold">Build fast, responsive sites with&nbsp;Component</h1>
+            <p class="lead mb-4">
+                Powerful, extensible, and feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid system and components, and bring projects to life with powerful JavaScript plugins.
+              </p>
+              <p>Get started with Component
+                Component is a powerful, feature-packed frontend toolkit. Build anything—from prototype to production—in minutes.</p>
             @yield('content')
         </div>
     </section>
@@ -150,6 +152,7 @@
 .theme-red .sidebar .menu .list li.active > :first-child i, .theme-red .sidebar .menu .list li.active > :first-child span {
     color: #6197d5 !important;
 } 
+
 </style>
 
 

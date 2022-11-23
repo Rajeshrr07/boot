@@ -93,6 +93,7 @@
 		    localStorage.setItem('jsCode',jsCode.value);
 		    output.contentDocument.body.innerHTML = localStorage.htmlCode+`<style>${localStorage.cssCode}</style>`;
 		    output.contentWindow.eval(localStorage.jsCode);
+            console.log(output);
             })
             
     
