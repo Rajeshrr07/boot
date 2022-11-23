@@ -98,6 +98,7 @@ class WebController extends Controller
             ->orWhere('description', 'LIKE', "%{$search}%")
             ->get();
             $components = Category::all();
+            
         return view('Client.search',['posts'=>$posts,'components' => $components]);
     }
 

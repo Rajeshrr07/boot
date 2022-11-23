@@ -86,11 +86,11 @@
                     @forelse ($components as $comp )
                      <li class=" {{ Request::is('/show') ? 'active open' : ''}}">
                         <a href="{{ route('show',$comp->id) }}">
-                            {{ $comp->title }}
+                            <li class=" {{ Request::is('/show') ? 'active open' : ''}}">{{ $comp->title }}</li>
                         </a>
                     </li>  
                     @empty
-                        <h1>Data not Found</h1>
+                        <h3>Data not Found</h3>
                     @endforelse         
                 </ul>
             </div>
@@ -143,6 +143,7 @@
 
     
     @yield('scripts');
+    
 
 </body>
 <style>

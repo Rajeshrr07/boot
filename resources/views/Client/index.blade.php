@@ -25,10 +25,10 @@
 
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/themes/all-themes.css') }}" rel="stylesheet" />
+    
 </head>
 
 <body class="theme-red">
-    <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
@@ -77,7 +77,7 @@
                             </a>
                         </li>
                     @empty
-                        <h1>Data not Found</h1>
+                    <h3>Data not Found</h3>
                     @endforelse
                 </ul>
             </div>
@@ -137,26 +137,36 @@
                 <h2>Data Not Found</h2>
             @endforelse
     </section>
+    
 
     <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content" id="modal-content">
-                <div class="editor">
-                    <textarea class="htmlCode" id="html-code" hidden></textarea>
-                    <textarea class="cssCode" id="css-code" hidden></textarea>
-                    <textarea class="jsCode" id="js-code" hidden></textarea>
-                    <iframe id="output" allowfullscreen frameborder="0"></iframe>
+            
+            <div class="modal-content">
+               
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">Modal title</h4>   
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </div>
+                <div class="modal-body">
+                    <div class="editor">
+                        <textarea class="htmlCode" id="html-code" hidden></textarea>
+                        <textarea class="cssCode" id="css-code" hidden></textarea>
+                        <textarea class="jsCode" id="js-code" hidden></textarea>
+                        <iframe id="output" allowfullscreen frameborder="0"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+   
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/plugins/node-waves/waves.js') }}"></script>
     <script src="{{ asset('assets/js/admin.js') }}"></script>
     <script src="{{ asset('assets/js/demo.js') }}"></script>
-
     <script>
         $(document).on("click", "#showOutput", async function() {
             var id = $(this).attr("data-id");
@@ -172,23 +182,22 @@
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    $('.htmlCode').html('');
-                    $('.cssCode').html('');
-                    $('.jsCode').html('');
+                    // $('.htmlCode').html('');
+                    // $('.cssCode').html('');
+                    // $('.jsCode').html('');
                     let htmlCode = response.html;
                     let cssCode = response.css;
                     let jsCode = response.javascript;
                     $('.htmlCode').html(htmlCode);
-                    $('.cssCode').append(cssCode);
-                    $('.jsCode').append(jsCode);
+                    $('.cssCode').html(cssCode);
+                    $('.jsCode').html(jsCode);
                 }
             });
-            myFunction()
+            myFunction();
         });
-
-        $('#defaultModal').on('hidden.bs.modal', function() {
-            location.reload();
-        });
+        // $('#defaultModal').on('hidden.bs.modal', function() {
+        //     location.reload();
+        // });
     </script>
     <script type="text/javascript">
         function myFunction() {
@@ -196,38 +205,24 @@
             let csscode = document.querySelector("#css-code").value;
             let jscode = document.querySelector("#js-code").value;
             let output = document.getElementById("output");
-            console.log('before', output);
             output.contentDocument.body.innerHTML = htmlcode + `<style>${csscode}</style>`;
             output.contentWindow.eval(jscode);
-            console.log('after', output);
         }
     </script>
-    {{-- <script>
-        var iframe = document.getElementById('output');
-        var style = document.createElement('style');
-        style.textContent =
-            'body {' +
-            '  margin:0px !important;'
-        '}';
-        iframe.contentDocument.head.appendChild(style);
-    </script> --}}
-
 </body>
-
 <style>
     iframe {
         width: 100%;
-        height: 100%;
+        height: 360px;
         padding: 10px;
         border: none !important;
         outline: none !important;
         margin: 0px !important;
-        
     }
-
-    .modal-content {
-        height: 80vh;
-        width: 80vw;
+    
+    .modal-body {
+        height: 360px;
+        width: auto;
         position: relative;
     }
 
@@ -251,6 +246,4 @@
         color: #6197d5 !important;
     }
 </style>
-
-
 </html>
