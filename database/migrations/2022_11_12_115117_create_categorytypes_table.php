@@ -19,7 +19,7 @@ class CreateCategorytypesTable extends Migration
             $table->text("categorytype_img")->nullabel();
             $table->longText('html')->nullable();
             $table->longText('title')->nullable();
-            // $table->longText('description')->nullable();
+            $table->longText('description')->nullable();
             $table->longText('css')->nullable();
             $table->longText('javascript')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
