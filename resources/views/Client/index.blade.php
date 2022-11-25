@@ -108,23 +108,24 @@
 								<a href="javascript:void(0)" class="btn btn-info btn-sm" id="showOutput"
 									data-id="{{ $card->id }}">Output</a>
 								<hr>
-								<h5>Html Code <button type="button" class="copy-btn" style="float:right" onclick= "myHtmlCopyFunction({{ $card->id }})">Copy text</button><span id="msg" style="color: green;"></span></h5>
+								<h5>Html Code <button type="button" id="copy-btn" style="float:right;" onclick="myHtmlCopyFunction({{ $card->id }})" >Copy text</button><span id="msg_{{ $card->id }}" style="color:green;"></span></h5>
 								@if (!empty($card->html))
-								<pre id="myInput">{{ $card->html }}</pre>
+								<pre id="myInput_{{ $card->id }}" >{{ $card->html }}
+								</pre>
 								@else
 								<pre>No Data Found</pre>
 								@endif
 								<hr>
-								<h5>Css Code <button type="button" class="copy-btn" style="float:right"  onclick="myCssCopyFunction({{ $card->id }})">Copy text</button><span id="Cssmsg" style="color: green;"></span></h5>
+								<h5>Css Code <button type="button" id="copy-btn" style="float:right;"  onclick="myCssCopyFunction({{ $card->id }})" >Copy text</button><span id="Cssmsg_{{ $card->id }}" style="color:green;"></h5>
 								@if (!empty($card->css))
-								<pre id="myCssInput"> {{ $card->css }} </pre>
+								<pre id="myCssInput_{{ $card->id }}"> {{ $card->css }} </pre>
 								@else
 								<pre>No Data Found</pre>
 								@endif
 								<hr>
-								<h5>Java Script Code <button type="button" class="copy-btn" style="float:right" onclick="myJsCopyFunction({{ $card->id }})">Copy text</button><span id="Jsmsg" style="color: green;"></span></h5>
+								<h5>Java Script Code <button type="button" id="copy-btn" style="float:right" onclick="myJsCopyFunction({{ $card->id }})">Copy text</button><span id="Jsmsg_{{ $card->id }}" style="color: green;"></span></h5>
 								@if (!empty($card->javascript))
-								<pre id="myJsInput"> {{ $card->javascript }} </pre>
+								<pre id="myJsInput_{{ $card->id }}"> {{ $card->javascript }} </pre>
 								@else
 								<pre>No Data Found</pre>
 								@endif
@@ -198,6 +199,7 @@
 		//     location.reload();
 		// });
 		</script>
+
 		<script type="text/javascript">
 		function myFunction() {
 			let htmlcode = document.querySelector("#html-code").value;
@@ -209,40 +211,38 @@
 		}
 		</script>
 		<script type="text/javascript">
-    
-		function myHtmlCopyFunction(id) {
-			const copyText = document.querySelectorAll('#myInput').textContent;
-			const msg = document.getElementById('msg');
+    	function myHtmlCopyFunction(id) {
+    	var copy = document.getElementById(`myInput_${id}`).textContent;
+    	var msg= document.getElementById(`msg_${id}`);
+    	var textArea = document.createElement('textarea');
+       textArea.textContent = copy;
+       document.body.append(textArea);
+       textArea.select();
+       document.execCommand("copy");
+       msg.innerHTML="Copied Successfull"
+       setTimeout(function () {
+       	msg.innerHTML=''
+       },7000);
+    	}
+		
+		function myCssCopyFunction(id) {
+			const copyText = document.getElementById(`myCssInput_${id}`).textContent;
+			const msg= document.getElementById(`Cssmsg_${id}`);
       const textArea = document.createElement('textarea');
       textArea.textContent = copyText;
       document.body.append(textArea);
       textArea.select();
       document.execCommand("copy");
       msg.innerHTML="Copied Successfull"
+
       setTimeout(function () {
       	msg.innerHTML=''
       },7000)
 		}
 
-
-		function myCssCopyFunction(id) {
-      
-			const copyText = document.getElementById("myCssInput").textContent;
-			const msg = document.getElementById('Cssmsg');
-      const textArea = document.createElement('textarea');
-      textArea.textContent = copyText;
-      document.body.append(textArea);
-      textArea.select();
-      document.execCommand("copy");
-      msg.innerHTML="Copied Successfull"
-
-      setTimeout(function () {
-      	msg.innerHTML=''
-      },2000)
-		}
 		function myJsCopyFunction(id) {
-			const copyText = document.getElementById("myJsInput").textContent;
-			const msg = document.getElementById('Jsmsg');
+			const copyText = document.getElementById(`myJsInput_${id}`).textContent;
+			const msg = document.getElementById(`Jsmsg_${id}`);
       const textArea = document.createElement('textarea');
       textArea.textContent = copyText;
       document.body.append(textArea);
@@ -252,9 +252,11 @@
 
       setTimeout(function () {
       	msg.innerHTML=''
-      },2000)
+      },7000)
 		}
 		</script>
+
+		
 	</body>
 	<style>
 	iframe {
